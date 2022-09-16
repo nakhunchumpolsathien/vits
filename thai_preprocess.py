@@ -22,10 +22,10 @@ if __name__ == '__main__':
     for index, row in tqdm(train_df.iterrows(), total=train_df.shape[0], desc='Processing Train Set'):
         file_name = os.path.basename(row['file_path'])
         file_path = os.path.join('/home/da/Documents/data/experiment_setup/tts', file_name)
-        res = transliterate(row['text'], engine="ipa")
+        res = transliterate(row['text'].strip(), engine="ipa")
 
         clean.write(f'{file_path}|{res}\n')
-        raw.write(f'{file_path}|{row["file_path"]}\n')
+        raw.write(f'{file_path}|{row["file_path"].strip()}\n')
 
     raw.close()
     clean.close()
@@ -39,11 +39,10 @@ if __name__ == '__main__':
     for index, row in tqdm(valid_df.iterrows(), total=valid_df.shape[0], desc='Processing Validation Set'):
         file_name = os.path.basename(row['file_path'])
         file_path = os.path.join('/home/da/Documents/data/experiment_setup/tts', file_name)
-        res = transliterate(row['text'], engine="ipa")
+        res = transliterate(row['text'].strip(), engine="ipa")
 
         clean.write(f'{file_path}|{res}\n')
-        raw.write(f'{file_path}|{row["file_path"]}\n')
+        raw.write(f'{file_path}|{row["file_path"].strip()}\n')
 
     raw.close()
     clean.close()
-    
