@@ -4,7 +4,7 @@
 Defines the set of symbols used in text input to the model.
 '''
 _pad        = '_'
-_punctuation = ';:,.!?¡¿—…"«»“” '
+_punctuation = ';:,.!?¡¿—…"«»“\u200e” '
 _letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 _letters_ipa = "ɑɐɒæɓʙβɔɕçɗɖðʤəɘɚɛɜɝɞɟʄɡɠɢʛɦɧħɥʜɨɪʝɭɬɫɮʟɱɯɰŋɳɲɴøɵɸθœɶʘɹɺɾɻʀʁɽʂʃʈʧʉʊʋⱱʌɣɤʍχʎʏʑʐʒʔʡʕʢǀǁǂǃˈˌːˑʼʴʰʱʲʷˠˤ˞↓↑→↗↘'̩'ᵻ"
 _stress_ipa = "̯͡"
