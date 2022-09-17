@@ -15,6 +15,7 @@ hyperparameter. Some cleaners are English-specific. You'll typically want to use
 import re
 from unidecode import unidecode
 from phonemizer import phonemize
+from pythainlp.transliterate import transliterate
 
 
 # Regular expression matching whitespace:
@@ -42,12 +43,22 @@ _abbreviations = [(re.compile('\\b%s\\.' % x[0], re.IGNORECASE), x[1]) for x in 
   ('ft', 'fort'),
 ]]
 
+_thai_abbreviations = [(re.compile('\\b%s\\.' % x[0], re.IGNORECASE), x[1]) for x in [
+  ('ส.ส.', 'สอสอ'),
+  ('ส.ว.', 'สอวอ'),
+]]
+
+
 
 def expand_abbreviations(text):
   for regex, replacement in _abbreviations:
     text = re.sub(regex, replacement, text)
   return text
 
+def expand_thai_abbreviations(text):
+  for regex, replacement in _thai_abbreviations:
+    text = re.sub(regex, replacement, text)
+  return text
 
 def expand_numbers(text):
   return normalize_numbers(text)
@@ -96,5 +107,13 @@ def english_cleaners2(text):
   text = lowercase(text)
   text = expand_abbreviations(text)
   phonemes = phonemize(text, language='en-us', backend='espeak', strip=True, preserve_punctuation=True, with_stress=True)
+  phonemes = collapse_whitespace(phonemes)
+  return phonemes
+
+
+def thai_cleaners(text):
+  '''Pipeline for Thai Text'''
+  text = expand_thai_abbreviations(text)
+  phonemes = transliterate(text.strip(), engine="ipa")
   phonemes = collapse_whitespace(phonemes)
   return phonemes

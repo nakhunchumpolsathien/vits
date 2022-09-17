@@ -10,3 +10,4 @@ torchvision==0.7.0
 Unidecode==1.1.1
 pythainlp==3.0.9
 epitran==1.23
+gdown
